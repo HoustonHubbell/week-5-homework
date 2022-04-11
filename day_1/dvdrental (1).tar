@@ -1,0 +1,195 @@
+-- Hello World SQL Query, SELECT all record from actor table
+SELECT * 
+FROM actor;
+
+-- Query for first_name and last_name data in the actor table
+SELECT first_name,last_name
+FROM actor;
+
+-- Query for first_names that equal Nick using WHERE clause
+select first_name, last_name
+from actor
+WHERE first_name = 'Nick';
+
+-- Query for a first name that equals nick using the LIKE and WHERE clauses
+select first_name, last_name
+from actor
+WHERE first_name LIKE 'Nick';
+
+-- Query for first_name data that starts with the letter j using the LIKE and WHERE clauses
+-- and the % (wildcard)
+SELECT first_name, actor_id
+FROM actor
+WHERE first_name LIKE 'J%';
+
+-- Query for all first_name data that starts with 'k' and has 2 letter after
+-- using LIKE WHERE and  underscores__
+SELECT first_name, last_name
+FROM actor
+WHERE first_name LIKE 'K__';
+
+-- Query for all first_name data that starts with k and ends with th
+-- using LIKE WHERE wildcard % and underscore
+SELECT first_name, last_name, actor_id
+FROM actor
+WHERE first_name LIKE 'K_%th';
+
+-- Comparing operators are:
+-- greater than > -- less than <
+-- greater or equal >= less or equal <=
+-- not equal <>
+
+-- explor data in the payment table with a SELECT ALL
+SELECT ALL *
+FROM payment;
+
+-- Query for data that shows customers who paid 
+-- an amount greater than $2
+SELECT customer_id, amount
+FROM payment
+WHERE amount > 2.00;
+
+-- Query for data showing who paid less than $7.99
+SELECT customer_id, amount
+FROM payment
+WHERE amount < 7.99;
+
+-- Query for data showing who paid
+-- an amount less than or equal to $4.99
+select customer_id, amount
+from payment
+where amount <= 4.99;
+
+-- Query for data showing who paid an amount 
+-- greater than or equal to $7.99
+select customer_id, amount, payment_id
+from payment
+where amount >= 7.99;
+
+-- Query for dat showing who paid
+-- an amount greater or equal to $2.00
+-- in ascending order
+SELECT customer_id, amount
+FROM payment
+WHERE amount >= 2.00
+ORDER BY amount;
+
+-- Query for data showing amounts paid
+-- BETWEEN 2.00 AND 7.99
+SELECT customer_id, amount
+FROM payment
+WHERE amount BETWEEN 2.00 AND 7.99;
+
+-- Query for data showing customers who paid 
+-- an amount NOT EQUAL <> to 0.00
+-- ORDER BY descending order
+SELECT customer_id, amount
+FROM payment
+WHERE amount <> 0.00
+ORDER BY amount DESC;
+
+-- Explore the other tables
+SELECT ALL *
+FROM city;
+SELECT city
+FROM city
+WHERE city LIKE 'X_%';
+
+SELECT ALL *
+FROM film;
+
+SELECT title, description
+FROM film
+WHERE title LIKE 'T_%';
+
+SELECT ALL *
+FROM rental;
+
+SELECT rental_date
+from rental
+where rental_date between '2005-06-21 03:59:13' and '2005-07-21_%';
+
+select all * 
+from inventory;
+
+select all * 
+from film_category;
+
+select all *
+from language;
+
+select all *
+from rental;
+
+select rental_date
+from rental
+where rental_date between '2005-06-01' and '2005-07-01';
+
+-- SQL Agregations => SUM(), COUNT(), MIN(), MAX()
+
+-- Query to display SUM() of amount greater > tahn 5.99
+SELECT SUM(amount)
+from payment
+where amount > 5.99;
+
+-- Display the AVG() of amounts greater than 5.99
+SELECT AVG(amount)
+from payment
+where amount > 5.99;
+
+-- Display the COUNT() of amounts greater than 5.99
+SELECT COUNT(DISTINCT(amount))
+from payment
+where amount > 5.99;
+
+--Query to display MAX() greater than 7.99
+SELECT MAX(amount)
+from payment
+where amount > 7.99;
+
+--Query to display MIN
+SELECT MIN(amount)
+from payment
+where amount > 7.99;
+
+SELECT amount
+from payment
+where amount = 7.99;
+
+-- Query to display different ammounts grouped together
+-- along with COUNT
+SELECT amount, COUNT(amount) as amount_num
+from payment
+GROUP BY amount
+ORDER BY amount_num desc;
+
+-- Query to display customer id grouped together with their total amounts
+SELECT customer_id, SUM(amount)
+from payment
+GROUP BY customer_id
+ORDER BY SUM(amount) desc;
+
+-- Query to display customer_id and their amounts grouped by id and amounts
+SELECT customer_id, amount
+from payment
+GROUP BY amount, customer_id
+ORDER BY customer_id;
+
+-- Query to display info from the customer table
+SELECT ALL *
+FROM customer;
+
+-- Query to display customer ids that show up more than 5 times
+SELECT COUNT(customer_id), email
+from customer
+where email like 'j__%'
+GROUP BY email
+HAVING COUNT(customer_id) > 0;
+
+select all *
+from inventory;
+
+select count(film_id), film_id
+from inventory
+group by film_id
+order by count(film_id)desc;
